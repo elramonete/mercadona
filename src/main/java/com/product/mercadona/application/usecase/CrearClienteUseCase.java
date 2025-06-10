@@ -15,15 +15,17 @@ import java.util.stream.Collectors;
 public class CrearClienteUseCase {
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private ClienteMapper clienteMapper;
     public ClienteResponse crearCliente(ClienteCommand clienteCommand) {
-        Cliente cliente = ClienteMapper.INSTANCE.toEntity(clienteCommand);
+        Cliente cliente = clienteMapper.toEntity(clienteCommand);
         cliente = clienteRepository.save(cliente);
-        return ClienteMapper.INSTANCE.toResponse(cliente);
+        return clienteMapper.toResponse(cliente);
     }
 
     public List<ClienteResponse> obtenerTodosLosClientes() {
         return clienteRepository.findAll().stream()
-                .map(ClienteMapper.INSTANCE::toResponse)
+                .map(clienteMapper::toResponse)
                 .collect(Collectors.toList());
     }
 }
