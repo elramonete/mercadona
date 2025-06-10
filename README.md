@@ -135,3 +135,8 @@ mercadona/
 - **presentation/**: Contiene los controladores REST que manejan las solicitudes de los clientes.
 - **resources/**: Contiene archivos de configuración como `application.properties`.
 - **test/**: Contiene las pruebas unitarias y de integración para cada capa del proyecto.
+
+http://localhost:8087/swagger-ui.html
+
+
+![img.png](img.png)
