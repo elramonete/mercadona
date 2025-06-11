@@ -5,7 +5,9 @@ import com.product.mercadona.domain.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 public interface CestaCompraRepository extends JpaRepository<CestaDeCompra, Long> {
 
-    CestaDeCompra findByClienteId(Long clienteId);
+    Optional<CestaDeCompra> findByClienteId(Long clienteId);
 }

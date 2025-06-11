@@ -15,6 +15,11 @@ public class Producto {
     private Long id;
     private String nombre;
     private double precio;
+
+    @ManyToOne
+    @JoinColumn(name = "cesta_id")
+    private CestaDeCompra cestaDeCompra; // Referencia a la cesta de compra
+
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCompra> compras; // Lista de compras en las que está incluido el producto
     // Método para calcular el total de ingresos generados por este producto
