@@ -65,8 +65,6 @@ mvn spring-boot:run
 
 
 ### Estructura del Proyecto "mercadona"
-
-```plaintext
 mercadona/
 │
 ├── src/
@@ -80,7 +78,11 @@ mercadona/
 │   │   │               │   │   ├── ClienteCommand.java
 │   │   │               │   │   ├── ClienteResponse.java
 │   │   │               │   │   ├── ProductoCommand.java
-│   │   │               │   │   └── ProductoResponse.java
+│   │   │               │   │   ├── ProductoResponse.java
+│   │   │               │   │   ├── CestaDeCompraCommand.java
+│   │   │               │   │   ├── CestaDeCompraResponse.java
+│   │   │               │   │   ├── ItemCompraResponse.java
+│   │   │               │   │   └── ItemCompraRequest.java
 │   │   │               │   ├── exception/
 │   │   │               │   │   ├── cliente/
 │   │   │               │   │   │   ├── ClienteAlreadyExistsException.java
@@ -88,13 +90,21 @@ mercadona/
 │   │   │               │   │   ├── producto/
 │   │   │               │   │   │   ├── ProductoAlreadyExistsException.java
 │   │   │               │   │   │   └── ProductoNotFoundException.java
+│   │   │               │   │   ├── cesta/
+│   │   │               │   │   │   └── CestaDeCompraNotFoundException.java
+│   │   │               │   │   └── compra/
+│   │   │               │   │       └── CompraNotFoundException.java
 │   │   │               │   ├── mapper/
 │   │   │               │   │   ├── ClienteMapper.java
-│   │   │               │   │   └── ProductoMapper.java
+│   │   │               │   │   ├── ProductoMapper.java
+│   │   │               │   │   ├── CestaDeCompraMapper.java
+│   │   │               │   │   └── ItemCompraMapper.java
 │   │   │               │   └── usecase/
 │   │   │               │       ├── crear/
 │   │   │               │       │   ├── CrearClienteUseCase.java
-│   │   │               │       │   └── CrearProductoUseCase.java
+│   │   │               │       │   ├── CrearProductoUseCase.java
+│   │   │               │       │   ├── AgregarProductoACestaUseCase.java
+│   │   │               │       │   └── RealizarCompraUseCase.java
 │   │   │               │       ├── borrar/
 │   │   │               │       │   ├── BorrarClienteUseCase.java
 │   │   │               │       │   └── BorrarProductoUseCase.java
@@ -103,15 +113,21 @@ mercadona/
 │   │   │               │       │   └── ActualizarProductoUseCase.java
 │   │   │               │       ├── obtener/
 │   │   │               │       │   ├── ObtenerClienteUseCase.java
-│   │   │               │       │   └── ObtenerProductoUseCase.java
+│   │   │               │       │   ├── ObtenerProductoUseCase.java
+│   │   │               │       │   ├── ObtenerCestaDeCompraUseCase.java
+│   │   │               │       │   └── ObtenerComprasPorClienteUseCase.java
 │   │   │               │
 │   │   │               ├── domain/
 │   │   │               │   ├── Cliente.java
 │   │   │               │   ├── Email.java
 │   │   │               │   ├── Producto.java
+│   │   │               │   ├── CestaDeCompra.java
+│   │   │               │   ├── ItemCompra.java
 │   │   │               │   └── repository/
 │   │   │               │       ├── ClienteRepository.java
-│   │   │               │       └── ProductoRepository.java
+│   │   │               │       ├── ProductoRepository.java
+│   │   │               │       ├── CestaDeCompraRepository.java
+│   │   │               │       └── ItemCompraRepository.java
 │   │   │               │
 │   │   │               ├── infrastructure/
 │   │   │               │   ├── configuration/
@@ -119,11 +135,15 @@ mercadona/
 │   │   │               │   ├── messaging/
 │   │   │               │   └── repository/
 │   │   │               │       ├── ClienteJpaRepository.java
-│   │   │               │       └── ProductoJpaRepository.java
+│   │   │               │       ├── ProductoJpaRepository.java
+│   │   │               │       ├── CestaDeCompraJpaRepository.java
+│   │   │               │       └── ItemCompraJpaRepository.java
 │   │   │               │
 │   │   │               └── presentation/
 │   │   │                   ├── ClienteController.java
-│   │   │                   └── ProductoController.java
+│   │   │                   ├── ProductoController.java
+│   │   │                   ├── CestaDeCompraController.java
+│   │   │                   └── ItemCompraController.java
 │   │   │
 │   │   └── resources/
 │   │       ├── application.properties
@@ -142,19 +162,30 @@ mercadona/
 │                       │   ├── CrearProductoUseCaseTest.java
 │                       │   ├── BorrarProductoUseCaseTest.java
 │                       │   ├── ActualizarProductoUseCaseTest.java
-│                       │   └── ObtenerProductoUseCaseTest.java
+│                       │   ├── ObtenerProductoUseCaseTest.java
+│                       │   ├── AgregarProductoACestaUseCaseTest.java
+│                       │   ├── EliminarProductoDeCestaUseCaseTest.java
+│                       │   ├── ObtenerCestaDeCompraUseCaseTest.java
+│                       │   ├── RealizarCompraUseCaseTest.java
+│                       │   └── ObtenerComprasPorClienteUseCaseTest.java
 │                       └── presentation/
 │                           ├── ClienteControllerTest.java
 │                           ├── ProductoControllerTest.java
+│                           ├── CestaDeCompraControllerTest.java
+│                           ├── ItemCompraControllerTest.java
 │                           ├── BorrarClienteControllerTest.java
 │                           ├── ActualizarClienteControllerTest.java
 │                           ├── ObtenerClienteControllerTest.java
 │                           ├── BorrarProductoControllerTest.java
 │                           ├── ActualizarProductoControllerTest.java
-│                           └── ObtenerProductoControllerTest.java
+│                           ├── ObtenerProductoControllerTest.java
+│                           ├── AgregarProductoACestaControllerTest.java
+│                           ├── EliminarProductoDeCestaControllerTest.java
+│                           ├── ObtenerCestaDeCompraControllerTest.java
+│                           ├── RealizarCompraControllerTest.java
+│                           └── ObtenerComprasPorClienteControllerTest.java
 │
-└── pom.xml
-```
+└── pom.xml```
 
 ### Descripción de la Estructura
 
