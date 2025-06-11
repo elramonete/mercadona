@@ -1,21 +1,14 @@
 package com.product.mercadona.application.dto;
-
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import lombok.Builder;
+import lombok.Value;
+@Value
+@Builder
 public class ProductoCommand {
-
     @Schema(description = "Nombre del producto", example = "Manzana")
-    private String nombre;
-
+    String nombre;
     @Schema(description = "Categoría del producto", example = "Frutas")
-    private String categoria;
-
+    String categoria;
     @Schema(description = "Precio del producto", example = "1.99")
-    private Double precio;
+    Double precio;
 }
