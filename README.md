@@ -73,7 +73,7 @@ mercadona/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
-│   │   │       └── example/
+│   │   │       └── product/
 │   │   │           └── mercadona/
 │   │   │               ├── application/
 │   │   │               │   ├── dto/
@@ -81,12 +81,29 @@ mercadona/
 │   │   │               │   │   ├── ClienteResponse.java
 │   │   │               │   │   ├── ProductoCommand.java
 │   │   │               │   │   └── ProductoResponse.java
+│   │   │               │   ├── exception/
+│   │   │               │   │   ├── cliente/
+│   │   │               │   │   │   ├── ClienteAlreadyExistsException.java
+│   │   │               │   │   │   └── ClienteNotFoundException.java
+│   │   │               │   │   ├── producto/
+│   │   │               │   │   │   ├── ProductoAlreadyExistsException.java
+│   │   │               │   │   │   └── ProductoNotFoundException.java
 │   │   │               │   ├── mapper/
 │   │   │               │   │   ├── ClienteMapper.java
 │   │   │               │   │   └── ProductoMapper.java
 │   │   │               │   └── usecase/
-│   │   │               │       ├── CrearClienteUseCase.java
-│   │   │               │       └── CrearProductoUseCase.java
+│   │   │               │       ├── crear/
+│   │   │               │       │   ├── CrearClienteUseCase.java
+│   │   │               │       │   └── CrearProductoUseCase.java
+│   │   │               │       ├── borrar/
+│   │   │               │       │   ├── BorrarClienteUseCase.java
+│   │   │               │       │   └── BorrarProductoUseCase.java
+│   │   │               │       ├── actualizar/
+│   │   │               │       │   ├── ActualizarClienteUseCase.java
+│   │   │               │       │   └── ActualizarProductoUseCase.java
+│   │   │               │       ├── obtener/
+│   │   │               │       │   ├── ObtenerClienteUseCase.java
+│   │   │               │       │   └── ObtenerProductoUseCase.java
 │   │   │               │
 │   │   │               ├── domain/
 │   │   │               │   ├── Cliente.java
@@ -119,10 +136,22 @@ mercadona/
 │                   └── mercadona/
 │                       ├── application/
 │                       │   ├── CrearClienteUseCaseTest.java
-│                       │   └── CrearProductoUseCaseTest.java
+│                       │   ├── BorrarClienteUseCaseTest.java
+│                       │   ├── ActualizarClienteUseCaseTest.java
+│                       │   ├── ObtenerClienteUseCaseTest.java
+│                       │   ├── CrearProductoUseCaseTest.java
+│                       │   ├── BorrarProductoUseCaseTest.java
+│                       │   ├── ActualizarProductoUseCaseTest.java
+│                       │   └── ObtenerProductoUseCaseTest.java
 │                       └── presentation/
 │                           ├── ClienteControllerTest.java
-│                           └── ProductoControllerTest.java
+│                           ├── ProductoControllerTest.java
+│                           ├── BorrarClienteControllerTest.java
+│                           ├── ActualizarClienteControllerTest.java
+│                           ├── ObtenerClienteControllerTest.java
+│                           ├── BorrarProductoControllerTest.java
+│                           ├── ActualizarProductoControllerTest.java
+│                           └── ObtenerProductoControllerTest.java
 │
 └── pom.xml
 ```

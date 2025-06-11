@@ -1,4 +1,4 @@
-package com.product.mercadona.application.usecase;
+package com.product.mercadona.application.usecase.crear;
 
 import com.product.mercadona.application.dto.ProductoCommand;
 import com.product.mercadona.application.dto.ProductoResponse;
@@ -21,9 +21,4 @@ public class CrearProductoUseCase {
         return ProductoMapper.INSTANCE.toResponse(producto);
     }
 
-    public List<ProductoResponse> obtenerTodosLosProductos() {
-        return productoRepository.findAll().stream()
-                .map(ProductoMapper.INSTANCE::toResponse)
-                .collect(Collectors.toList());
-    }
 }

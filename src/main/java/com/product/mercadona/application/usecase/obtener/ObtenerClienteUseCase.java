@@ -1,9 +1,8 @@
-package com.product.mercadona.application.usecase;
+package com.product.mercadona.application.usecase.obtener;
 
-import com.product.mercadona.application.dto.ClienteCommand;
 import com.product.mercadona.application.dto.ClienteResponse;
+import com.product.mercadona.application.exception.cliente.ClienteNotFoundException;
 import com.product.mercadona.application.mapper.ClienteMapper;
-import com.product.mercadona.domain.Cliente;
 import com.product.mercadona.domain.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,21 +11,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CrearClienteUseCase {
+public class ObtenerClienteUseCase {
     @Autowired
     private ClienteRepository clienteRepository;
     @Autowired
     private ClienteMapper clienteMapper;
-    public ClienteResponse crearCliente(ClienteCommand clienteCommand) {
-        Cliente cliente = clienteMapper.toEntity(clienteCommand);
-        cliente = clienteRepository.save(cliente);
-        return clienteMapper.toResponse(cliente);
-    }
 
     public List<ClienteResponse> obtenerTodosLosClientes() {
         return clienteRepository.findAll().stream()
                 .map(clienteMapper::toResponse)
                 .collect(Collectors.toList());
     }
-}
 
+    public ClienteResponse obtenerClientePorId(Long id) {
+        return clienteRepository.findById(id)
+                .map(clienteMapper::toResponse)
+                .orElseThrow(() -> new ClienteNotFoundException("Client not found with ID: " + id));
+    }
+}
