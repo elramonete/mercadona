@@ -6,12 +6,13 @@ import com.product.mercadona.application.mapper.ProductoMapper;
 import com.product.mercadona.domain.CestaDeCompra;
 import com.product.mercadona.domain.repository.CestaCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 @Component
 public class ObtenerCestaDeCompraUseCase {
     private final CestaCompraRepository cestaDeCompraRepository;
     @Autowired
-    public ObtenerCestaDeCompraUseCase(CestaCompraRepository cestaDeCompraRepository) {
+    public ObtenerCestaDeCompraUseCase(@Qualifier("cestaCompraJpaRepository")CestaCompraRepository cestaDeCompraRepository) {
         this.cestaDeCompraRepository = cestaDeCompraRepository;
     }
     public CestaDeCompraResponse ejecutar(Long clienteId) {

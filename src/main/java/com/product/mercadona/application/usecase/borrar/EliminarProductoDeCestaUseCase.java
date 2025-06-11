@@ -6,6 +6,7 @@ import com.product.mercadona.domain.repository.CestaCompraRepository;
 import com.product.mercadona.domain.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +15,7 @@ public class EliminarProductoDeCestaUseCase {
     private final CestaCompraRepository cestaDeCompraRepository;
     private final ProductoRepository productoRepository;
     @Autowired
-    public EliminarProductoDeCestaUseCase(CestaCompraRepository cestaDeCompraRepository,
+    public EliminarProductoDeCestaUseCase(@Qualifier("cestaCompraJpaRepository") CestaCompraRepository cestaDeCompraRepository,
                                            ProductoRepository productoRepository) {
         this.cestaDeCompraRepository = cestaDeCompraRepository;
         this.productoRepository = productoRepository;

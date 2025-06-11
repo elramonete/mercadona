@@ -4,13 +4,14 @@ import com.product.mercadona.domain.CestaDeCompra;
 import com.product.mercadona.domain.Producto;
 import com.product.mercadona.domain.repository.CestaCompraRepository;
 import com.product.mercadona.domain.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AgregarProductoACestaUseCase {
     private final CestaCompraRepository cestaDeCompraRepository;
     private final ProductoRepository productoRepository;
-    public AgregarProductoACestaUseCase(CestaCompraRepository cestaDeCompraRepository,
+    public AgregarProductoACestaUseCase(@Qualifier("cestaCompraJpaRepository") CestaCompraRepository cestaDeCompraRepository,
                                          ProductoRepository productoRepository) {
         this.cestaDeCompraRepository = cestaDeCompraRepository;
         this.productoRepository = productoRepository;
