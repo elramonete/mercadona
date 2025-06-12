@@ -185,7 +185,7 @@ mercadona/
 │                           ├── RealizarCompraControllerTest.java
 │                           └── ObtenerComprasPorClienteControllerTest.java
 │
-└── pom.xml
+└── pom.xml ```
 
 ### Descripción de la Estructura
 
