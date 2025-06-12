@@ -196,7 +196,7 @@ mercadona/
 │                           ├── RealizarCompraControllerTest.java
 │                           └── ObtenerComprasPorClienteControllerTest.java
 │
-└── pom.xml```plaintext
+└── pom.xml
 
  
 
