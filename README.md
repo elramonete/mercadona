@@ -1,5 +1,3 @@
-¡Por supuesto! A continuación te proporciono una explicación detallada que puedes incluir en el archivo `README.md` de tu proyecto "mercadona". Esto abarca las tecnologías utilizadas, la arquitectura y la versión de Java.
-
 ---
 
 # Proyecto Mercadona
@@ -200,6 +198,8 @@ mercadona/
 
 http://localhost:8087/swagger-ui.html
 
+
+---
 
 ![img.png](img.png)
 
