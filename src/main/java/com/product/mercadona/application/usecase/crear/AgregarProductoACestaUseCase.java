@@ -3,6 +3,7 @@ package com.product.mercadona.application.usecase.crear;
 import com.product.mercadona.application.dto.CestaDeCompraCommand;
 import com.product.mercadona.domain.CestaDeCompra;
 import com.product.mercadona.domain.Cliente;
+import com.product.mercadona.domain.ItemCompra;
 import com.product.mercadona.domain.Producto;
 import com.product.mercadona.domain.repository.CestaCompraRepository;
 import com.product.mercadona.domain.repository.ClienteRepository;
@@ -33,16 +34,27 @@ public class AgregarProductoACestaUseCase {
         CestaDeCompra cestaDeCompra = cestaDeCompraRepository.findByClienteId(cestaDeCompraCommand.getClienteId())
                 .orElseGet(() -> crearNuevaCesta(cestaDeCompraCommand.getClienteId()));
 
-        // Agregar los productos a la cesta
-        cestaDeCompraCommand.getProductoIds().forEach(productoId -> {
-            Producto producto = productoRepository.findById(productoId)
-                    .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + productoId));
-            cestaDeCompra.agregarProducto(producto);
+        Cliente cliente = cestaDeCompra.getCliente();
+
+        // Agregar los productos a la cesta como ItemCompra con cantidad
+        cestaDeCompraCommand.getProductos().forEach(dto -> {
+            Producto producto = productoRepository.findById(dto.getProductoId())
+                    .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + dto.getProductoId()));
+
+            ItemCompra item = new ItemCompra();
+            item.setProducto(producto);
+            item.setCliente(cliente);
+            item.setCestaDeCompra(cestaDeCompra);
+            item.setCantidad(dto.getCantidad());
+
+            cestaDeCompra.agregarItem(item);
         });
 
         // Guardar los cambios en la cesta de compra
         cestaDeCompraRepository.save(cestaDeCompra);
     }
+
+
 
     private CestaDeCompra crearNuevaCesta(Long clienteId) {
         Cliente cliente = clienteRepository.findById(clienteId)

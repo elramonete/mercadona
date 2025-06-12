@@ -20,40 +20,24 @@ public class CestaDeCompra {
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente; // Cliente asociado a la cesta
+    private Cliente cliente;
 
     @OneToMany(mappedBy = "cestaDeCompra", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Producto> productos = new ArrayList<>(); // Lista de productos en la cesta
+    private List<ItemCompra> items = new ArrayList<>();
 
-
-    // Método para agregar un producto a la cesta
-    public void agregarProducto(Producto producto) {
-        productos.add(producto);
+    public void agregarItem(ItemCompra item) {
+        items.add(item);
+        item.setCestaDeCompra(this);
     }
 
-    // Método para calcular el total de la cesta
+    public void eliminarItem(ItemCompra item) {
+        items.remove(item);
+        item.setCestaDeCompra(null);
+    }
+
     public double calcularTotal() {
-        return productos.stream()
-                .mapToDouble(Producto::getPrecio) // Usando referencia a método
+        return items.stream()
+                .mapToDouble(item -> item.getCantidad() * item.getProducto().getPrecio())
                 .sum();
-    }
-
-    // Método para establecer el cliente
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    // Método para eliminar un producto de la cesta
-    public void eliminarProducto(Producto producto) {
-        productos.remove(producto);
-    }
-
-    // Método para obtener los IDs de los productos en la cesta
-    public List<Long> getProductoIds() {
-        List<Long> productoIds = new ArrayList<>();
-        for (Producto producto : productos) {
-            productoIds.add(producto.getId());
-        }
-        return productoIds;
     }
 }

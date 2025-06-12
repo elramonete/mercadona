@@ -19,4 +19,7 @@ public class ItemCompra {
     @JoinColumn(name = "producto_id") // Columna que referencia al producto
     private Producto producto;
     private int cantidad; // Cantidad del producto comprada
+    @ManyToOne
+    @JoinColumn(name = "cesta_id") // Columna que referencia al cestaDeCompra
+    private CestaDeCompra cestaDeCompra;
 }

@@ -22,14 +22,18 @@ public class ObtenerCestaDeCompraUseCase {
         CestaDeCompra cestaDeCompra = cestaDeCompraRepository.findByClienteId(clienteId)
                 .orElseThrow(() -> new IllegalArgumentException("Cesta de compra no encontrada para el cliente ID: " + clienteId));
 
-        // Convertir la cesta de compra a su representación DTO
+        // Convertir los productos desde los ItemCompra
+        var productos = cestaDeCompra.getItems().stream()
+                .map(item -> ProductoMapper.INSTANCE.toResponse(item.getProducto(), item.getCantidad()))
+                .toList();
+
+        // Construir la respuesta
         return CestaDeCompraResponse.builder()
                 .id(cestaDeCompra.getId())
                 .clienteId(cestaDeCompra.getCliente().getId())
-                .productos(cestaDeCompra.getProductos().stream()
-                        .map(producto -> ProductoMapper.INSTANCE.toResponse(producto)) // Usando el mapper para convertir productos
-                        .toList())
-                .total(cestaDeCompra.calcularTotal()) // Calcular el total de la cesta
+                .productos(productos)
+                .total(cestaDeCompra.calcularTotal())
                 .build();
     }
+
 }
