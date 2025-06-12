@@ -1,4 +1,4 @@
----
+
 
 # Proyecto Mercadona
 
@@ -55,7 +55,23 @@ Para ejecutar este proyecto, asegúrate de tener instalado Java 21 y Maven. Lueg
 mvn clean install
 mvn spring-boot:run
 ```
+### Descripción de la Estructura
 
+- **application/**: Contiene la lógica de aplicación, incluyendo DTOs, mappers y casos de uso (use cases).
+- **domain/**: Contiene las entidades del dominio (Cliente, Producto, etc.) y los repositorios que definen las interfaces para el acceso a datos.
+- **infrastructure/**: Contiene la implementación de la infraestructura, como la configuración de WebSocket, mensajería (colas), y otras integraciones necesarias.
+- **presentation/**: Contiene los controladores REST que manejan las solicitudes de los clientes.
+- **resources/**: Contiene archivos de configuración como `application.properties`.
+- **test/**: Contiene las pruebas unitarias y de integración para cada capa del proyecto.
+
+http://localhost:8087/swagger-ui.html
+
+
+---
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
 
 ### Estructura del Proyecto "mercadona"
 
@@ -185,21 +201,3 @@ mercadona/
  
 
 
-
-### Descripción de la Estructura
-
-- **application/**: Contiene la lógica de aplicación, incluyendo DTOs, mappers y casos de uso (use cases).
-- **domain/**: Contiene las entidades del dominio (Cliente, Producto, etc.) y los repositorios que definen las interfaces para el acceso a datos.
-- **infrastructure/**: Contiene la implementación de la infraestructura, como la configuración de WebSocket, mensajería (colas), y otras integraciones necesarias.
-- **presentation/**: Contiene los controladores REST que manejan las solicitudes de los clientes.
-- **resources/**: Contiene archivos de configuración como `application.properties`.
-- **test/**: Contiene las pruebas unitarias y de integración para cada capa del proyecto.
-
-http://localhost:8087/swagger-ui.html
-
-
----
-
-![img.png](img.png)
-
-![img_1.png](img_1.png)
