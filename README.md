@@ -56,11 +56,6 @@ mvn clean install
 mvn spring-boot:run
 ```
 
----
-
-
-
-
 
 ### Estructura del Proyecto "mercadona"
 
@@ -185,7 +180,11 @@ mercadona/
 │                           ├── RealizarCompraControllerTest.java
 │                           └── ObtenerComprasPorClienteControllerTest.java
 │
-└── pom.xml ```
+└── pom.xml```plaintext
+
+ 
+
+
 
 ### Descripción de la Estructura
 
