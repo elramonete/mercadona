@@ -40,4 +40,14 @@ public class CestaDeCompra {
                 .mapToDouble(item -> item.getCantidad() * item.getProducto().getPrecio())
                 .sum();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CestaDeCompra{");
+        sb.append("id=").append(id);
+        sb.append(", cliente=").append(cliente);
+        sb.append(", items=").append(items);
+        sb.append('}');
+        return sb.toString();
+    }
 }

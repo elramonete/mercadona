@@ -41,18 +41,31 @@ public class AgregarProductoACestaUseCase {
             Producto producto = productoRepository.findById(dto.getProductoId())
                     .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + dto.getProductoId()));
 
-            ItemCompra item = new ItemCompra();
-            item.setProducto(producto);
-            item.setCliente(cliente);
-            item.setCestaDeCompra(cestaDeCompra);
-            item.setCantidad(dto.getCantidad());
+            // Buscar si el producto ya existe en la cesta
+            ItemCompra itemExistente = cestaDeCompra.getItems().stream()
+                    .filter(item -> item.getProducto().getId().equals(dto.getProductoId()))
+                    .findFirst()
+                    .orElse(null);
 
-            cestaDeCompra.agregarItem(item);
+            if (itemExistente != null) {
+                // Si el producto ya existe, sumar la cantidad
+                itemExistente.setCantidad(itemExistente.getCantidad() + dto.getCantidad());
+            } else {
+                // Si el producto no existe, crear un nuevo ItemCompra
+                ItemCompra nuevoItem = new ItemCompra();
+                nuevoItem.setProducto(producto);
+                nuevoItem.setCliente(cliente);
+                nuevoItem.setCestaDeCompra(cestaDeCompra);
+                nuevoItem.setCantidad(dto.getCantidad());
+
+                cestaDeCompra.agregarItem(nuevoItem);
+            }
         });
 
         // Guardar los cambios en la cesta de compra
         cestaDeCompraRepository.save(cestaDeCompra);
     }
+
 
 
 
