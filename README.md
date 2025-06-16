@@ -73,6 +73,10 @@ http://localhost:8087/swagger-ui.html
 
 ![img_1.png](img_1.png)
 
+Añadimos el swagger con la cesta de la compra, con la suma y el resultado Total 
+
+![img_2.png](img_2.png)
+
 ### Estructura del Proyecto "mercadona"
 
 ```plaintext

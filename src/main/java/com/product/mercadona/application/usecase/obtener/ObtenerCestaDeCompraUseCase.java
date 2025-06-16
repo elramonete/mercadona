@@ -4,6 +4,7 @@ import com.product.mercadona.application.dto.CestaDeCompraResponse;
 import com.product.mercadona.application.mapper.ProductoMapper;
 import com.product.mercadona.domain.CestaDeCompra;
 import com.product.mercadona.domain.repository.CestaCompraRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class ObtenerCestaDeCompraUseCase {
         this.cestaDeCompraRepository = cestaDeCompraRepository;
     }
 
+    @Transactional
     public CestaDeCompraResponse ejecutar(Long clienteId) {
         // Recuperar la cesta de compra del cliente
         CestaDeCompra cestaDeCompra = cestaDeCompraRepository.findByClienteId(clienteId)
