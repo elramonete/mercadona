@@ -1,0 +1,9 @@
+package com.product.mercadona.application.exception;
+
+
+public class MensajesError {
+    public static final String CESTA_NO_ENCONTRADA = "Cesta de compra no encontrada para el cliente ID: ";
+    public static final String PRODUCTO_NO_ENCONTRADO = "Producto no encontrado con ID: ";
+    public static final String PRODUCTO_AGREGADO = "Producto agregado a la cesta.";
+    // Añade más mensajes según sea necesario
+}
