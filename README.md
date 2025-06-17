@@ -24,7 +24,7 @@ Este proyecto es una aplicación de gestión para clientes y productos del Merca
 
 - **WebSocket**: Implementado para permitir la comunicación en tiempo real entre el cliente y el servidor.
 
-- **Spring Kafka**: Integrado para la gestión de colas de mensajes, permitiendo una arquitectura basada en eventos.
+- **Spring RabbitMq**: Integrado para la gestión de colas de mensajes, permitiendo una arquitectura basada en eventos.
 
 ## Arquitectura
 
@@ -77,7 +77,19 @@ Añadimos el swagger con la cesta de la compra, con la suma y el resultado Total
 
 ![img_2.png](img_2.png)
 
-Añadimos las colas de mensajeria RabbitMQ para la lista de productos, de clientes, crear un producto, un cliente y la cesta de la compra
+Añadimos las colas de mensajeria RabbitMQ para la lista de productos, de clientes, crear un producto, un cliente y la cesta de la compra.
+
+Para que nos funcione la mensajeria:
+1- Tener instalado el Docker desktop  (mi pc)
+    Abrimos el Desktop Docker 
+2- Debemos de arrancar el proyecto rabbitMQConsumer
+https://github.com/elramonete/rabbitMqConsumer
+Abrimos el Intell Ij > Terminal > docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+o directamente desde el Desktop Docker (dando al play). 
+
+3- Accedemos una vez arrancado el docker a RabbitMQ http://localhost:15672/#/queues 
+
+
 
 ![img_3.png](img_3.png)
 
