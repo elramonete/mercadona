@@ -77,11 +77,15 @@ Añadimos el swagger con la cesta de la compra, con la suma y el resultado Total
 
 ![img_2.png](img_2.png)
 
+Añadimos las colas de mensajeria RabbitMQ para la lista de productos, de clientes, crear un producto, un cliente y la cesta de la compra
+
+![img_3.png](img_3.png)
+
+
 ### Estructura del Proyecto "mercadona"
 
 ```plaintext
 mercadona/
-│
 ├── src/
 │   ├── main/
 │   │   ├── java/
@@ -115,14 +119,13 @@ mercadona/
 │   │   │               │   │   ├── CestaDeCompraMapper.java
 │   │   │               │   │   └── ItemCompraMapper.java
 │   │   │               │   └── usecase/
+│   │   │               │       ├── borrar/
+│   │   │               │       │   ├── BorrarClienteUseCase.java
+│   │   │               │       │   └── EliminarProductoDeCestaUseCase.java
 │   │   │               │       ├── crear/
 │   │   │               │       │   ├── CrearClienteUseCase.java
 │   │   │               │       │   ├── CrearProductoUseCase.java
-│   │   │               │       │   ├── AgregarProductoACestaUseCase.java
-│   │   │               │       │   └── RealizarCompraUseCase.java
-│   │   │               │       ├── borrar/
-│   │   │               │       │   ├── BorrarClienteUseCase.java
-│   │   │               │       │   └── BorrarProductoUseCase.java
+│   │   │               │       │   └── AgregarProductoACestaUseCase.java
 │   │   │               │       ├── actualizar/
 │   │   │               │       │   ├── ActualizarClienteUseCase.java
 │   │   │               │       │   └── ActualizarProductoUseCase.java
@@ -146,8 +149,8 @@ mercadona/
 │   │   │               │
 │   │   │               ├── infrastructure/
 │   │   │               │   ├── configuration/
-│   │   │               │   ├── websocket/
 │   │   │               │   ├── messaging/
+│   │   │               │   │   └── RabbitMQService.java // Nuevo servicio agregado
 │   │   │               │   └── repository/
 │   │   │               │       ├── ClienteJpaRepository.java
 │   │   │               │       ├── ProductoJpaRepository.java
@@ -155,15 +158,15 @@ mercadona/
 │   │   │               │       └── ItemCompraJpaRepository.java
 │   │   │               │
 │   │   │               └── presentation/
-│   │   │                   ├── ClienteController.java
-│   │   │                   ├── ProductoController.java
-│   │   │                   ├── CestaDeCompraController.java
-│   │   │                   └── ItemCompraController.java
-│   │   │
+│   │   │                   ├── api/
+│   │   │                   │   ├── ClienteController.java
+│   │   │                   │   ├── ProductoController.java
+│   │   │                   │   ├── CestaDeCompraController.java // Actualizado
+│   │   │                   │   └── ItemCompraController.java
+│   │   │                   └── ...
 │   │   └── resources/
 │   │       ├── application.properties
 │   │       └── static/
-│   │
 │   └── test/
 │       └── java/
 │           └── com/
@@ -199,9 +202,7 @@ mercadona/
 │                           ├── ObtenerCestaDeCompraControllerTest.java
 │                           ├── RealizarCompraControllerTest.java
 │                           └── ObtenerComprasPorClienteControllerTest.java
-│
 └── pom.xml
-
  
 
 

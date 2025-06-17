@@ -8,6 +8,7 @@ import com.product.mercadona.application.usecase.crear.AgregarProductoACestaUseC
 
 import com.product.mercadona.application.usecase.obtener.ObtenerCestaDeCompraUseCase;
 import com.product.mercadona.infrastructure.configuration.RabbitConfig;
+import com.product.mercadona.infrastructure.messaging.RabbitMQService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.amqp.AmqpException;
@@ -30,13 +31,14 @@ public class CestaDeCompraController {
     @Autowired
     private ObtenerCestaDeCompraUseCase obtenerCestaDeCompraUseCase;
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private RabbitMQService rabbitMQService;
+
     @Operation(summary = "Agregar un producto a la cesta", description = "Agrega un producto a la cesta de compra del cliente")
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarProducto(@RequestBody CestaDeCompraCommand cestaDeCompraCommand) {
         try {
             agregarProductoACestaUseCase.ejecutar(cestaDeCompraCommand);
-            return enviarMensajeRabbitMQ(MensajesError.PRODUCTO_AGREGADO)
+            return rabbitMQService.enviarMensaje(MensajesError.PRODUCTO_AGREGADO)
                     .map(message -> ResponseEntity.status(HttpStatus.CREATED).body(message))
                     .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el mensaje a RabbitMQ."));
         } catch (Exception e) {
@@ -44,16 +46,6 @@ public class CestaDeCompraController {
         }
     }
 
-    private Optional<String> enviarMensajeRabbitMQ(String message) {
-        try {
-            rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_NAME, message);
-            return Optional.of(message);
-        } catch (AmqpException amqpException) {
-            // Manejo específico de errores de RabbitMQ
-            System.err.println("Error al enviar el mensaje a RabbitMQ: " + amqpException.getMessage());
-            return Optional.empty();
-        }
-    }
 
 
     @Operation(summary = "Eliminar un producto de la cesta", description = "Elimina un producto de la cesta de compra del cliente")
@@ -61,7 +53,10 @@ public class CestaDeCompraController {
     public ResponseEntity<?> eliminarProducto(@RequestBody CestaDeCompraCommand cestaDeCompraCommand) {
         try {
             eliminarProductoDeCestaUseCase.ejecutar(cestaDeCompraCommand);
-            return ResponseEntity.ok("Producto eliminado de la cesta.");
+            return   rabbitMQService.enviarMensaje(MensajesError.PRODUCTO_ELIMINADO)
+                    .map(message -> ResponseEntity.status(HttpStatus.CREATED).body(message))
+                    .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el mensaje a RabbitMQ."));
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error al eliminar el producto de la cesta.");
         }
