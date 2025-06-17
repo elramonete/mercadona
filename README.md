@@ -81,6 +81,10 @@ Añadimos las colas de mensajeria RabbitMQ para la lista de productos, de client
 
 ![img_3.png](img_3.png)
 
+Hacemos un postman para probar obtener los clientes, pero el
+servidor del proyecto consumidor, no esta levantado.
+
+![img_4.png](img_4.png)
 
 ### Estructura del Proyecto "mercadona"
 
